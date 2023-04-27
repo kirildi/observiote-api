@@ -12,8 +12,18 @@
     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
     GNU General Public License for more details.
  */
-export interface ApiEndpointInterface {
-  loginEndpoint: string;
-  deviceEndpoint: string;
-  sensorEndpoint: string;
+
+import UserModel from "../models/UserModel.js";
+
+class LoginController {
+  constructor() {}
+
+  login = async (req: any, res: any) => {
+    this.#userModel;
+    res.json({ message: "POST new tea" }); // dummy function for now
+  };
+
+  #userModel = new UserModel();
 }
+
+export default LoginController;

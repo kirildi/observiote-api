@@ -1,7 +1,24 @@
+/*
+    Observiote-API Application
+    Copyright (C) 2023 Kiril Ivanov
+
+    This program is free software; you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation; either version 2 of the License, or
+    (at your option) any later version.
+    
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+ */
+
 import express from "express";
 import { Application } from "express";
 import bodyParser from "body-parser";
 import cors from "cors";
+import LoginRoute from "../src/routes/LoginRoute.js";
+import { API_BASE, endpoint } from "../src/config.js";
 
 class App {
   public app: Application;
@@ -9,6 +26,12 @@ class App {
   constructor() {
     this.app = express();
     this.setConfig();
+    this.#setRoutes();
+  }
+
+  #setRoutes() {
+    const loginRoute = new LoginRoute();
+    this.app.use(API_BASE + endpoint.loginEndpoint, loginRoute.router);
   }
 
   private setConfig() {

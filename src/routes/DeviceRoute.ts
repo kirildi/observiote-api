@@ -12,8 +12,21 @@
     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
     GNU General Public License for more details.
  */
-export interface ApiEndpointInterface {
-  loginEndpoint: string;
-  deviceEndpoint: string;
-  sensorEndpoint: string;
+import express from "express";
+import DeviceController from "../controllers/DeviceController.js";
+
+class DeviceRoute {
+  constructor() {
+    this.#routerInstance.post("", async (req, res) => {
+      // device route handler
+    });
+  }
+
+  get router() {
+    return this.#routerInstance;
+  }
+  #routerInstance = express.Router();
+  #deviceController = new DeviceController();
 }
+
+export default DeviceRoute;
