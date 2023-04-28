@@ -14,13 +14,26 @@
  */
 
 import UserModel from "../models/UserModel.js";
+import { Response, Request } from "express";
 
 class LoginController {
   constructor() {}
 
-  login = async (req: any, res: any) => {
-    this.#userModel;
-    res.json({ message: "POST new tea" }); // dummy function for now
+  login = async (req: Request, res: Response) => {
+    const user = await this.#userModel.findOneByUsername(req.body.username);
+
+    if (!user) {
+      res.json({ message: "Wrong username" });
+      return;
+    }
+
+    const isPasswordMatch = await this.#userModel.comparePassword(req.body.password, user.userPassword);
+
+    if (!isPasswordMatch) {
+      res.json({ message: "Wrong password" });
+      return;
+    }
+    res.json({ message: "USER true" });
   };
 
   #userModel = new UserModel();

@@ -12,7 +12,7 @@
     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
     GNU General Public License for more details.
  */
-import { Schema, model } from "mongoose";
+import { Schema, model, Model } from "mongoose";
 import { UserInterface } from "../interfaces/UserInterface.js";
 
 const userSchema = new Schema<UserInterface>({
@@ -20,12 +20,33 @@ const userSchema = new Schema<UserInterface>({
   userName: { type: String, required: true },
   userPassword: { type: String, required: true },
   userLogin: { type: Boolean, required: true },
+  userRole: { type: String, required: true },
+  userCreateDate: { type: Date, required: true },
+  userLastModifiedDate: { type: Date, required: true },
 });
 
 class UserModel {
   constructor() {
-    model<UserInterface>("User", userSchema);
+    this.#userModel = model<UserInterface>("User", userSchema);
   }
+
+  findOneByUsername = (userName: string): Promise<UserInterface | null> => {
+    return new Promise(async (resolve, reject) => {
+      try {
+        const response = await this.#userModel.findOne({ userName }).exec();
+        resolve(response);
+      } catch (error: any) {
+        reject(error);
+      }
+    });
+  };
+
+  comparePassword = async (password: string, hashedPassword: string): Promise<boolean> => {
+    return password === hashedPassword ? true : false;
+    // return await bcrypt.compare(password, hashedPassword); //TODO add bcrypt check
+  };
+
+  readonly #userModel: Model<UserInterface>;
 }
 
 export default UserModel;

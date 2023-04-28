@@ -13,9 +13,14 @@
     GNU General Public License for more details.
  */
 
-export interface UserInterface {
+import { Document } from "mongoose";
+
+export interface UserInterface extends Document {
   userId: string;
   userName: string;
   userPassword: string;
   userLogin: boolean;
+  userRole: string;
+  userCreateDate: Date;
+  userLastModifiedDate: Date;
 }

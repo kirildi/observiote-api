@@ -12,12 +12,12 @@
     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
     GNU General Public License for more details.
  */
-import express from "express";
+import express, { Response, Request } from "express";
 import LoginController from "../controllers/LoginController.js";
 
 class LoginRoute {
   constructor() {
-    this.#routerInstance.post("", async (req, res) => {
+    this.#routerInstance.post("", async (req: Request, res: Response) => {
       await this.#loginController.login(req, res);
     });
   }
