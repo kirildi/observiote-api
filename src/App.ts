@@ -13,12 +13,12 @@
     GNU General Public License for more details.
  */
 
-import express from "express";
-import { Application } from "express";
+import express, { Application } from "express";
 import bodyParser from "body-parser";
 import cors from "cors";
-import LoginRoute from "../src/routes/LoginRoute.js";
 import { API_BASE, endpoint } from "../src/config.js";
+import LoginRoute from "../src/routes/LoginRoute.js";
+import DeviceRoute from "./routes/DeviceRoute.js";
 
 class App {
   public app: Application;
@@ -31,7 +31,9 @@ class App {
 
   #setRoutes() {
     const loginRoute = new LoginRoute();
+    const deviceRoute = new DeviceRoute();
     this.app.use(API_BASE + endpoint.loginEndpoint, loginRoute.router);
+    this.app.use(API_BASE + endpoint.deviceEndpoint, deviceRoute.router);
   }
 
   private setConfig() {
