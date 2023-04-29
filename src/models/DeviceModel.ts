@@ -12,7 +12,7 @@
     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
     GNU General Public License for more details.
  */
-import { Schema, model } from "mongoose";
+import { Schema, model, Model } from "mongoose";
 import { DeviceInterface } from "../interfaces/DeviceInterface.js";
 
 const deviceSchema = new Schema<DeviceInterface>({
@@ -24,12 +24,25 @@ const deviceSchema = new Schema<DeviceInterface>({
   deviceCoordinates: { type: String, required: true },
   deviceCrateDate: { type: String, required: true },
   deviceLastModifyDate: { type: String, required: true },
+  userId: { type: String, required: true },
 });
 
 class DeviceModel {
   constructor() {
-    model<DeviceInterface>("Device", deviceSchema);
+    this.#deviceModel = model<DeviceInterface>("Device", deviceSchema);
   }
+  findAllByUserId = (userId: string): Promise<Array<DeviceInterface>> => {
+    return new Promise(async (resolve, reject) => {
+      try {
+        const response = await this.#deviceModel.find({ userId }).exec();
+        resolve(response);
+      } catch (error: any) {
+        reject(error);
+      }
+    });
+  };
+
+  readonly #deviceModel: Model<DeviceInterface>;
 }
 
 export default DeviceModel;

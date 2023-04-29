@@ -13,12 +13,26 @@
     GNU General Public License for more details.
  */
 
+import { Request, Response } from "express";
+
 import DeviceModel from "../models/DeviceModel.js";
+import UserModel from "../models/UserModel.js";
 
 class DeviceController {
   constructor() {}
 
+  getDevice = async (req: Request, res: Response) => {
+    const user = await this.#userModel.findOneByUsername(req.body.username);
+    const device = await this.#deviceModel.findAllByUserId(user?._id.toString());
+    if (!device) {
+      res.json({ message: "No devices found on provided username" });
+      return;
+    }
+    res.json(device).end();
+  };
+
   #deviceModel = new DeviceModel();
+  #userModel = new UserModel();
 }
 
 export default DeviceController;

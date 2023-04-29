@@ -12,13 +12,13 @@
     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
     GNU General Public License for more details.
  */
-import express from "express";
+import express, { Response, Request } from "express";
 import DeviceController from "../controllers/DeviceController.js";
 
 class DeviceRoute {
   constructor() {
-    this.#routerInstance.post("", async (req, res) => {
-      // device route handler
+    this.#routerInstance.post("", async (req: Request, res: Response) => {
+      this.#deviceController.getDevice(req, res);
     });
   }
 
