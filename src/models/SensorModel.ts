@@ -12,7 +12,7 @@
     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
     GNU General Public License for more details.
  */
-import { Schema, model } from "mongoose";
+import { Schema, model, Model } from "mongoose";
 import { SensorInterface } from "../interfaces/SensorInterface.js";
 
 const sensorSchema = new Schema<SensorInterface>({
@@ -25,8 +25,19 @@ const sensorSchema = new Schema<SensorInterface>({
 
 class SensorModel {
   constructor() {
-    model<SensorInterface>("Sensor", sensorSchema);
+    this.#sensorModel = model<SensorInterface>("Sensor", sensorSchema);
   }
+  findAllByUserId = (userId: string): Promise<Array<SensorInterface>> => {
+    return new Promise(async (resolve, reject) => {
+      try {
+        const response = await this.#sensorModel.find({ userId }).exec();
+        resolve(response);
+      } catch (error: any) {
+        reject(error);
+      }
+    });
+  };
+  readonly #sensorModel: Model<SensorInterface>;
 }
 
 export default SensorModel;

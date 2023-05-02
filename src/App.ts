@@ -19,6 +19,7 @@ import cors from "cors";
 import { API_BASE, endpoint } from "../src/config.js";
 import LoginRoute from "../src/routes/LoginRoute.js";
 import DeviceRoute from "./routes/DeviceRoute.js";
+import SensorRoute from "./routes/SensorRoute.js";
 
 class App {
   public app: Application;
@@ -32,8 +33,10 @@ class App {
   #setRoutes() {
     const loginRoute = new LoginRoute();
     const deviceRoute = new DeviceRoute();
+    const sensorRoute = new SensorRoute();
     this.app.use(API_BASE + endpoint.loginEndpoint, loginRoute.router);
     this.app.use(API_BASE + endpoint.deviceEndpoint, deviceRoute.router);
+    this.app.use(API_BASE + endpoint.sensorEndpoint, sensorRoute.router);
   }
 
   private setConfig() {
