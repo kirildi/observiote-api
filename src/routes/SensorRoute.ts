@@ -12,13 +12,13 @@
     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
     GNU General Public License for more details.
  */
-import express from "express";
+import express, { Response, Request } from "express";
 import SensorController from "../controllers/SensorController.js";
 
 class SensorRoute {
   constructor() {
-    this.#routerInstance.post("", async (req, res) => {
-      // sensor route handler
+    this.#routerInstance.post("", async (req: Request, res: Response) => {
+      this.#sensorController.getSensorData(req, res);
     });
   }
 

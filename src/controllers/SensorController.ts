@@ -13,10 +13,20 @@
     GNU General Public License for more details.
  */
 
+import { Request, Response } from "express";
 import SensorModel from "../models/SensorModel.js";
 
 class SensorController {
   constructor() {}
+
+  getSensorData = async (req: Request, res: Response) => {
+    const sensorData = await this.#sensorModel.findAllByUserId(req.body.username);
+    if (!sensorData) {
+      res.json({ message: "No sensor data on this device" });
+      return;
+    }
+    res.json(sensorData).end();
+  };
 
   #sensorModel = new SensorModel();
 }

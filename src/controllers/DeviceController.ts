@@ -22,6 +22,7 @@ class DeviceController {
   constructor() {}
 
   getDevice = async (req: Request, res: Response) => {
+    //TODO why I'm searching for the user again here?
     const user = await this.#userModel.findOneByUsername(req.body.username);
     const device = await this.#deviceModel.findAllByUserId(user?._id.toString());
     if (!device) {
