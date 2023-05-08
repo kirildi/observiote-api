@@ -12,8 +12,9 @@
     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
     GNU General Public License for more details.
  */
-import { Schema, model } from "mongoose";
+import { Schema, model, Model } from "mongoose";
 import { SensorTypeInterface } from "../interfaces/SensorTypeInterface.js";
+import { resolve } from "path";
 
 const sensorTypeSchema = new Schema<SensorTypeInterface>({
   sensorTypeId: { type: String, required: true },
@@ -22,8 +23,21 @@ const sensorTypeSchema = new Schema<SensorTypeInterface>({
 
 class SensorTypeModel {
   constructor() {
-    model<SensorTypeInterface>("SensorType", sensorTypeSchema);
+    this.#sensorTypeModel = model<SensorTypeInterface>("SensorType", sensorTypeSchema);
   }
+
+  findBySensorTypeName = (sensorTypeName: string): Promise<SensorTypeInterface | null> => {
+    return new Promise(async (resolve, reject) => {
+      try {
+        let findName = { sensorTypeName: sensorTypeName };
+        const response = await this.#sensorTypeModel.findOne(findName).exec();
+        resolve(response !== null ? response : null);
+      } catch (error: any) {
+        reject(error);
+      }
+    });
+  };
+  readonly #sensorTypeModel: Model<SensorTypeInterface>;
 }
 
 export default SensorTypeModel;
