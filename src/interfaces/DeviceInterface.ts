@@ -22,5 +22,5 @@ export interface DeviceInterface {
   deviceCoordinates: string;
   deviceCrateDate: string;
   deviceLastModifyDate: string;
-  userId: string;
+  userName: string;
 }
