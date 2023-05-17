@@ -24,17 +24,17 @@ const deviceSchema = new Schema<DeviceInterface>({
   deviceCoordinates: { type: String, required: true },
   deviceCrateDate: { type: String, required: true },
   deviceLastModifyDate: { type: String, required: true },
-  userId: { type: String, required: true },
+  userName: { type: String, required: true },
 });
 
 class DeviceModel {
   constructor() {
     this.#deviceModel = model<DeviceInterface>("Device", deviceSchema);
   }
-  findAllByUserId = (userId: string): Promise<Array<DeviceInterface>> => {
+  findAllByUserName = (userName: string): Promise<Array<DeviceInterface>> => {
     return new Promise(async (resolve, reject) => {
       try {
-        const response = await this.#deviceModel.find({ userId }).exec();
+        const response = await this.#deviceModel.find({ userName }).exec();
         resolve(response);
       } catch (error: any) {
         reject(error);

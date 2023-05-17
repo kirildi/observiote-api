@@ -16,15 +16,13 @@
 import { Request, Response } from "express";
 
 import DeviceModel from "../models/DeviceModel.js";
-import UserModel from "../models/UserModel.js";
 
 class DeviceController {
   constructor() {}
 
   getDevice = async (req: Request, res: Response) => {
-    //TODO why I'm searching for the user again here?
-    const user = await this.#userModel.findOneByUsername(req.body.username);
-    const device = await this.#deviceModel.findAllByUserId(user?._id.toString());
+    const device = await this.#deviceModel.findAllByUserName("user");
+    // const device = await this.#deviceModel.findAllByUserName(req.body.username);
     if (!device) {
       res.json({ message: "No devices found on provided username" });
       return;
@@ -33,7 +31,6 @@ class DeviceController {
   };
 
   #deviceModel = new DeviceModel();
-  #userModel = new UserModel();
 }
 
 export default DeviceController;
