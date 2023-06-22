@@ -12,14 +12,9 @@
     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
     GNU General Public License for more details.
  */
-import { Schema, model, Model } from "mongoose";
+import { model, Model } from "mongoose";
+import { sensorTypeSchema } from "../schemas/SensorTypeSchema.js";
 import { SensorTypeInterface } from "../interfaces/SensorTypeInterface.js";
-import { resolve } from "path";
-
-const sensorTypeSchema = new Schema<SensorTypeInterface>({
-  sensorTypeId: { type: String, required: true },
-  sensorTypeName: { type: String, required: true },
-});
 
 class SensorTypeModel {
   constructor() {

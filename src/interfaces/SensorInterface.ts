@@ -15,8 +15,9 @@
 
 export interface SensorInterface {
   sensorId: string;
-  sensorValueType: string;
+  sensorTypeId: string;
   sensorDescription: string;
   sensorCoordinates: string;
   sensorCoordinatesRange: string;
+  deviceId: string;
 }
