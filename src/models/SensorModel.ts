@@ -27,10 +27,11 @@ class SensorModel {
   constructor() {
     this.#sensorModel = model<SensorInterface>("Sensor", sensorSchema);
   }
-  findAllByUserId = (userId: string): Promise<Array<SensorInterface>> => {
+  findAllByDeviceId = (devId: string | number): Promise<Array<SensorInterface>> => {
     return new Promise(async (resolve, reject) => {
       try {
-        const response = await this.#sensorModel.find({ userId }).exec();
+        const response = await this.#sensorModel.find({ deviceId: devId }).exec();
+
         resolve(response);
       } catch (error: any) {
         reject(error);
