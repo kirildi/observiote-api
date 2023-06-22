@@ -20,7 +20,8 @@ class SensorController {
   constructor() {}
 
   getSensorData = async (req: Request, res: Response) => {
-    const sensorData = await this.#sensorModel.findAllByUserId(req.body.username);
+    const sensorData = await this.#sensorModel.findAllByDeviceId(req.body.deviceId);
+
     if (!sensorData) {
       res.json({ message: "No sensor data on this device" });
       return;
