@@ -38,7 +38,6 @@ class SensorModel {
             return populatedSensor;
           })
         );
-        console.log(populatedSensors);
 
         resolve(populatedSensors);
       } catch (error: any) {
