@@ -12,17 +12,9 @@
     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
     GNU General Public License for more details.
  */
-import { Schema, model } from "mongoose";
+import { model } from "mongoose";
 import { LocationInterface } from "../interfaces/LocationInterface.js";
-
-const locationSchema = new Schema<LocationInterface>({
-  locationId: { type: String, required: true },
-  locationName: { type: String, required: true },
-  locationCoordinates: { type: String, required: true },
-  locationCreateDate: { type: String, required: true },
-  locationLastModifyDate: { type: String, required: true },
-  locationImage: { type: String, required: true },
-});
+import { locationSchema } from "../schemas/LocationSchema.js";
 
 class LocationModel {
   constructor() {

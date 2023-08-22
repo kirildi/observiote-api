@@ -12,14 +12,9 @@
     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
     GNU General Public License for more details.
  */
-import { Schema, model } from "mongoose";
+import { model } from "mongoose";
 import { UserConfigurationInterface } from "../interfaces/UserConfigurationInterface.js";
-
-const userConfigurationSchema = new Schema<UserConfigurationInterface>({
-  userConfigurationId: { type: String, required: true },
-  userConfigurationName: { type: String, required: true },
-  userConfigurationValue: { type: String, required: true },
-});
+import { userConfigurationSchema } from "../schemas/UserConfigurationSchema.js";
 
 class UserConfigurationModel {
   constructor() {

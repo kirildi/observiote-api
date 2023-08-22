@@ -12,15 +12,9 @@
     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
     GNU General Public License for more details.
  */
-import { Schema, model } from "mongoose";
+import { model } from "mongoose";
 import { LogInterface } from "../interfaces/LogInterface.js";
-
-const logSchema = new Schema<LogInterface>({
-  logId: { type: String, required: true },
-  logState: { type: String, required: true },
-  logInfo: { type: String, required: true },
-  logDate: { type: String, required: true },
-});
+import { logSchema } from "../schemas/LogSchema.js";
 
 class LogModel {
   constructor() {
