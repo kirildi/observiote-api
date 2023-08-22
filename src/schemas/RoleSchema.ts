@@ -12,14 +12,10 @@
     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
     GNU General Public License for more details.
  */
-import { model } from "mongoose";
+import { Schema } from "mongoose";
 import { RoleInterface } from "../interfaces/RoleInterface.js";
-import { roleSchema } from "../schemas/RoleSchema.js";
 
-class RoleModel {
-  constructor() {
-    model<RoleInterface>("Role", roleSchema);
-  }
-}
-
-export default RoleModel;
+export const roleSchema = new Schema<RoleInterface>({
+  roleId: { type: String, required: true },
+  roleName: { type: String, required: true },
+});

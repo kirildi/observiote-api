@@ -12,14 +12,9 @@
     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
     GNU General Public License for more details.
  */
-import { Schema, model } from "mongoose";
+import { model } from "mongoose";
 import { ConstructedDataPacketInterface } from "../interfaces/ConstructedDataPacketInterface.js";
-
-const cdpSchema = new Schema<ConstructedDataPacketInterface>({
-  constructedDataPacketId: { type: String, required: true },
-  constructedDataPacketValue: { type: String, required: true },
-  constructedDataPacketDate: { type: String, required: true },
-});
+import { cdpSchema } from "../schemas/ConstructedDataPacketSchema.js";
 
 class ConstructedDataPacketModel {
   constructor() {

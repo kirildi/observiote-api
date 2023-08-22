@@ -2,5 +2,6 @@
 
 # observiote-api
 
-Simple API based on Node.js, Express and MongoDB for the observiote project
-The Observiote project is located here: [LINK](https://github.com/kirildi/observiote)
+Observiote API based on Node.js, Express and MongoDB.
+
+The Observiote project itself is located here: [https://github.com/kirildi/observiote](https://github.com/kirildi/observiote)

@@ -12,20 +12,9 @@
     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
     GNU General Public License for more details.
  */
-import { Schema, model, Model } from "mongoose";
+import { model, Model } from "mongoose";
 import { DeviceInterface } from "../interfaces/DeviceInterface.js";
-
-const deviceSchema = new Schema<DeviceInterface>({
-  deviceId: { type: String, required: true },
-  deviceName: { type: String, required: true },
-  deviceImage: { type: String, required: true },
-  deviceHash: { type: String, required: true },
-  deviceDescription: { type: String, required: true },
-  deviceCoordinates: { type: String, required: true },
-  deviceCrateDate: { type: String, required: true },
-  deviceLastModifyDate: { type: String, required: true },
-  userName: { type: String, required: true },
-});
+import { deviceSchema } from "../schemas/DeviceSchema.js";
 
 class DeviceModel {
   constructor() {
