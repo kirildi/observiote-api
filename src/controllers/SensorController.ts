@@ -15,18 +15,19 @@
 
 import { Request, Response } from "express";
 import SensorModel from "../models/SensorModel.js";
+import { SensorInterface } from "../interfaces/SensorInterface.js";
 
 class SensorController {
   constructor() {}
 
-  getSensorData = async (req: Request, res: Response) => {
-    const sensorData = await this.#sensorModel.findAllByDeviceId(req.body.deviceId);
+  getAllSensors = async (req: Request, res: Response) => {
+    const sensors: SensorInterface[] = await this.#sensorModel.findAllByDeviceId(req.body.deviceId);
 
-    if (!sensorData) {
-      res.json({ message: "No sensor data on this device" });
+    if (!sensors) {
+      res.json({ message: "No sensors on this device" });
       return;
     }
-    res.json(sensorData).end();
+    res.json(sensors).end();
   };
 
   #sensorModel = new SensorModel();
