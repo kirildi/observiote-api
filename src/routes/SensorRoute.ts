@@ -18,7 +18,7 @@ import SensorController from "../controllers/SensorController.js";
 class SensorRoute {
   constructor() {
     this.#routerInstance.post("", async (req: Request, res: Response) => {
-      this.#sensorController.getSensorData(req, res);
+      this.#sensorController.getAllSensors(req, res);
     });
   }
 
